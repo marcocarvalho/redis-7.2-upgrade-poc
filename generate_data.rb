@@ -1,5 +1,5 @@
 @value_size = 1024  # 1KB
-@num_keys = 10
+@num_keys = 10_000
 
 # from: https://redis.io/docs/manual/patterns/bulk-loading/
 def gen_redis_proto(*cmd)
@@ -29,10 +29,10 @@ def expand(command)
 end
 
 commands = [
-  ["SET", () => { random_string }, () => { random_string }],
-  ["HMSET", () => { random_string }, () => { generate_n_keys(1) }, ->() { arr = generate_n_keys(rand(100)) ; arr.zip(arr.size.times.map { random_string }).flatten }],
-  ["LPUSH", () => { random_string }, () => { rand(10..@value_size).times.map { random_string } }],
-  ["ZADD", () => { random_string }, () => { rand(10..@value_size).times.map { [ rand(@value_size), random_string ] }.flatten }],
+  ["SET", ->() { random_string }, ->() { random_string }],
+  ["HSET", ->() { generate_n_keys(1) }, ->() { arr = generate_n_keys(rand(100)) ; arr.zip(arr.size.times.map { random_string }).flatten }],
+  ["LPUSH", ->() { random_string }, ->() { rand(10..@value_size).times.map { random_string } }],
+  ["ZADD", ->() { random_string }, ->() { rand(10..@value_size).times.map { [ rand(@value_size), random_string ] }.flatten }],
 ]
 
 @num_keys.times do |i|
