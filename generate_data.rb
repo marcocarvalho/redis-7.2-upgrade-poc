@@ -1,5 +1,5 @@
 @value_size = 1024  # 1KB
-@num_keys = 10_000
+@num_keys = 10_000 # it will generate about ~1.5GB of data
 
 # from: https://redis.io/docs/manual/patterns/bulk-loading/
 def gen_redis_proto(*cmd)
