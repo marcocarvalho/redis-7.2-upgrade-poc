@@ -22,10 +22,16 @@ Some errors will happen on HSET command, it's safe to ignore.
 
 ## Running the load_and_migrate.sh script
 
-Run the script and follow the steps
+Run the script until the last step of monitor the connections
 
 ```
 ./load_and_migrate.sh
+```
+
+## Break the replication and shutdown the old server
+
+```
+shutdown_old_server.sh
 ```
 
 # Documentation
